@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-sans: 'LifelogoEasy', Arial, sans-serif;
+  --font-mono: 'Courier New', monospace;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-greenDark: oklch(0.3558 0.1129 139.72);
+  --color-greenLight: oklch(0.5901 0.1057 134.4);
+  --color-yellowLight: oklch(0.7977 0.1514 77.8);
+  --color-yellowDark: oklch(0.7559 0.1627 71.03);
+  --color-orangeDark: oklch(0.5889 0.1885 39.04);
+  --color-orangeLight: oklch(0.7112 0.166 56.89);
+}
+
+@font-face {
+  font-family: 'LifelogoEasy';
+  src: url('/styles/fonts/LifelogoEasy.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.shantell-sans {
+  font-family: "Shantell Sans", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: 
+    "BNCE" 0, 
+    "INFM" 0, 
+    "SPAC" 0;
+}
+
+
+h1, h2, h3 {
+  font-family: 'LifelogoEasy', Arial, sans-serif;
+}
+
+p {
+  @apply
+    text-greenDark
+}
+
+.cardTitle {
+  @apply
+    font-bold 
+    text-5xl
+    text-shadow-lg/25
+}
+
+.card {
+  @apply
+    flex
+    flex-1
+    justify-center 
+    items-center 
+    bg-cover 
+    bg-center 
+    rounded-3xl 
+    shadow-2xl/70
+}
