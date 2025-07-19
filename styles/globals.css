@@ -1,18 +1,16 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-sans: 'LifelogoEasy', Arial, sans-serif;
+--font-sans: 'Shantell Sans', Arial, sans-serif;
+--font-display: 'LifelogoEasy', Arial, sans-serif;
   --font-mono: 'Courier New', monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 
   --color-greenDark: oklch(0.3558 0.1129 139.72);
   --color-greenLight: oklch(0.5901 0.1057 134.4);
@@ -24,7 +22,7 @@
 
 @font-face {
   font-family: 'LifelogoEasy';
-  src: url('/styles/fonts/LifelogoEasy.ttf') format('ttf');
+  src: url('/app/LifelogoEasy.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -44,7 +42,7 @@ body {
 }
 
 .shantell-sans {
-  font-family: "Shantell Sans", cursive;
+  font-family: var(--font-sans);
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings: 
@@ -53,8 +51,16 @@ body {
     "SPAC" 0;
 }
 
+@layer base {
+  h1 {
+    font-size: var(--text-2xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+  }
+}
 
-h1, h2, h3 {
+h1 {
   font-family: 'LifelogoEasy', Arial, sans-serif;
 }
 
