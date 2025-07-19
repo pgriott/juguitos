@@ -3,8 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
---font-sans: 'Shantell Sans', Arial, sans-serif;
---font-display: 'LifelogoEasy', Arial, sans-serif;
+  --font-sans: 'Shantell Sans', Arial, sans-serif;
+  --font-display: 'LifelogoEasy', Arial, sans-serif;
   --font-mono: 'Courier New', monospace;
 }
 
@@ -21,7 +21,7 @@
 }
 
 @font-face {
-  font-family: 'LifelogoEasy';
+  font-family: var(--font-display);
   src: url('/app/LifelogoEasy.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
