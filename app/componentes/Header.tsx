@@ -35,7 +35,7 @@ export default function Header () {
                     <MdCalendarMonth />
                 </Link>
                 <a 
-                    href='https://wa.me/13318030102' 
+                    href='https://wa.me/56956396452' 
                     rel="noopener noreferrer" 
                     className="flex items-center text-3xl text-greenDark hover:opacity-75 hover:scale-105"
                 >
