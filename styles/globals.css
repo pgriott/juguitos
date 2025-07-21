@@ -78,6 +78,7 @@ p {
 
 .card {
   @apply
+    relative
     flex
     flex-1
     justify-center 
@@ -86,4 +87,8 @@ p {
     bg-center 
     rounded-3xl 
     shadow-2xl/70
+    transform
+    transition
+    hover:opacity-75
+    hover:scale-105
 }
