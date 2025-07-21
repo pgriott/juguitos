@@ -14,7 +14,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
           {/* Jugos y cafe y frutas a eleccion*/}
           <div className="flex flex-col md:w-1/2 gap-y-2 md:gap-x-20">
             <h2 className='shantell-sans font-bold text-lg text-orangeDark text-shadow-md/10'>Jugos y café</h2>
-            <div className='flex flex-col sm:flex-row px-2 md:px-8 justify-between text-greenDark'>
+            <div className='flex flex-col lg:flex-row px-2 md:px-8 justify-between text-greenDark'>
                 <h2 className='sm:pr-4 shantell-sans font-semibold'>Jugo simple</h2>
                 <div className='flex px-12 justify-between'>
                   <p className='shantell-sans'>en agua: </p>
@@ -25,7 +25,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
                   <p className='inline shantell-sans font-medium'>$2800</p>
                 </div>
             </div>
-            <div className='flex flex-col sm:flex-row px-2 md:px-8 justify-between text-greenDark'>
+            <div className='flex flex-col lg:flex-row px-2 md:px-8 justify-between text-greenDark'>
                 <h2 className='sm:pr-4 shantell-sans font-semibold'>Jugo doble</h2>
                 <div className='flex px-12 justify-between'> 
                   <p className='shantell-sans'>en agua: </p>
@@ -36,7 +36,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
                   <p className='inline shantell-sans font-medium'>$3100</p>
                 </div>
             </div>
-            <div className='flex flex-col sm:flex-row px-2 md:px-8 justify-between text-greenDark'>
+            <div className='flex flex-col lg:flex-row px-2 md:px-8 justify-between text-greenDark'>
                 <h2 className='sm:pr-4 shantell-sans font-semibold'>Jugo triple</h2>
                 <div className='flex px-12 justify-between'> 
                   <p className='shantell-sans'>en agua: </p>
@@ -53,7 +53,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
             </div>
             <h2 className='mt-4 shantell-sans text-lg text-orangeDark text-shadow-md/10 font-bold'>Frutas a elección</h2>
             <p className='sm:mb-2 shantell-sans text-sm !text-orangeDark'>(consulta disponibilidad)</p>
-            <div className='grid grid-cols-2 sm:grid-cols-3 px-4 sm:px-8 mt-3 shantell-sans'>
+            <div className='grid grid-cols-2 lg:grid-cols-3 px-4 sm:px-8 mt-3 shantell-sans'>
                 <p>Frutilla</p>
                 <p>Mora</p>
                 <p>Arándano</p>
@@ -122,7 +122,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
                   <h2 className='pr-6 shantell-sans font-semibold'>2 o más frutas u hortalizas</h2>
                   <p className='shantell-sans'><b>$3400</b></p>
               </div>
-              <div className='grid grid-cols-3 mt-3 shantell-sans'>
+              <div className='grid grid-cols-2 lg:grid-cols-3 mt-3 shantell-sans'>
                   <p>Zanahoria</p>
                   <p>Betarraga</p>
                   <p>Piña</p>
