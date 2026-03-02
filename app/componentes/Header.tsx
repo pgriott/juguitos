@@ -11,10 +11,11 @@ export default function Header () {
             <div className="flex flex-col sm:flex-row justify-center items-center">
                 <div className="flex items-end">
                     <Image 
-                        src='/Logo.png'
+                        src='/Logo_monito.png'
                         alt="Logo"
                         height={60}
-                        width={50}
+                        width={60}
+                        className="rounded-full object-cover"
                     />
                     <Link href='/'>
                         <h1 className="px-6 text-4xl text-orangeDark text-shadow-sm hover:opacity-75 hover:scale-105">Juguitos Frescos</h1>
