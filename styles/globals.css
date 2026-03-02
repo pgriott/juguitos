@@ -81,14 +81,32 @@ p {
     relative
     flex
     flex-1
-    justify-center 
-    items-center 
-    bg-cover 
-    bg-center 
-    rounded-3xl 
+    justify-center
+    items-center
+    bg-cover
+    bg-center
+    rounded-3xl
     shadow-2xl/70
     transform
     transition
-    hover:opacity-75
     hover:scale-105
 }
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+  opacity: 0.75;
+}
+
+.card-yellow::before { background-color: var(--color-yellowDark); }
+.card-orange::before { background-color: var(--color-orangeDark); }
+.card-green::before  { background-color: var(--color-greenDark); }
+.card-gray::before  { background-color: var(--color-gray-400); }

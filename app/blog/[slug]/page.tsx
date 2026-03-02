@@ -1,7 +1,6 @@
 import { client } from "@/sanity/client"
 import { PortableText } from "@portabletext/react"
 import Image from "next/image"
-import { urlFor } from "../../../lib/sanity.image"
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]{
   _id,
@@ -14,8 +13,9 @@ const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]{
   }
 }`
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
-  const post = await client.fetch(POST_QUERY, { slug: params.slug })
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await client.fetch(POST_QUERY, { slug })
 
   if (!post) {
     return <div className="container mx-auto p-8">Post not found</div>
