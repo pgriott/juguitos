@@ -28,7 +28,7 @@ export default function ScrollToTopButton() {
     <button
       type='button'
       onClick={scrollToTop}
-      className="fixed bottom-4 right-4 py-3 px-4 bg-orangeLight text-greenDark shantell-sans font-bold rounded-full shadow-lg hover:bg-subMenu transition"
+      className="fixed bottom-4 right-4 py-3 px-4 bg-orangeLight text-greenDark shantell-sans font-bold rounded-full shadow-lg hover:bg-orangeDark transition"
       aria-label="Subir hasta arriba"
     >
       ↑ Subir

@@ -21,8 +21,6 @@ const options = { next: { revalidate: 30 } };
 
 export default async function PostsList() {
   const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
-  
-  console.log("Fetched posts:", posts);
 
   return (
     <main className="flex flex-col">
@@ -31,11 +29,11 @@ export default async function PostsList() {
           <li key={post._id} className="hover:underline">
             <Link href={`/blog/${post.slug.current}`}>
               <h2 className="text-xl text-greenDark font-semibold">{post.title}</h2>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-greenDark">
                 {new Date(post.publishedAt).toLocaleDateString()}
               </p>
               {post.excerpt && (
-                <p className="mt-2 text-gray-700">{post.excerpt}</p>
+                <p className="mt-2 text-orangeDark">{post.excerpt}</p>
               )}
             </Link>
           </li>

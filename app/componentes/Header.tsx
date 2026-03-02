@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { MdLocationOn } from 'react-icons/md';
 import { MdCalendarMonth } from 'react-icons/md';
 import { MdWhatsapp } from 'react-icons/md';
@@ -13,6 +13,15 @@ const dias = [
 
 export default function Header () {
     const [horariosAbierto, setHorariosAbierto] = useState(false)
+
+    useEffect(() => {
+        if (!horariosAbierto) return;
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setHorariosAbierto(false);
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [horariosAbierto]);
 
     return(
         <div className="sm:flex justify-between items-center mx-4 sm:mx-10 py-6 bg-yellowLight border-b-2 border-greenDark">
@@ -36,15 +45,17 @@ export default function Header () {
                     href='https://maps.app.goo.gl/WwZnZdwvgnq39QQc9'
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="flex items-center text-3xl text-greenDark hover:opacity-75 hover:scale-105"
+                    aria-label="Ver ubicación en el mapa"
+                    className="flex items-center text-3xl text-greenDark hover:opacity-75 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-greenDark rounded"
                 >
                     <MdLocationOn />
                 </a>
                 <div className="relative flex items-center">
                     <button
                         onClick={() => setHorariosAbierto(!horariosAbierto)}
-                        className="flex items-center text-3xl text-greenDark hover:opacity-75 hover:scale-105 cursor-pointer"
+                        className="flex items-center text-3xl text-greenDark hover:opacity-75 hover:scale-105 cursor-pointer focus:outline-none focus:ring-2 focus:ring-greenDark rounded"
                         aria-label="Ver horarios"
+                        aria-expanded={horariosAbierto}
                     >
                         <MdCalendarMonth />
                     </button>
@@ -54,8 +65,13 @@ export default function Header () {
                                 className="fixed inset-0 z-10"
                                 onClick={() => setHorariosAbierto(false)}
                             />
-                            <div className="fixed top-32 left-1/2 -translate-x-1/2 sm:absolute sm:top-10 sm:left-auto sm:right-0 sm:translate-x-0 z-20 bg-yellowLight border-2 border-greenDark rounded-xl shadow-lg p-4 min-w-56">
-                                <h2 className="text-center font-bold text-greenDark text-lg mb-3 shantell-sans">Horario</h2>
+                            <div
+                                role="dialog"
+                                aria-modal="true"
+                                aria-labelledby="horario-title"
+                                className="fixed top-32 left-1/2 -translate-x-1/2 sm:absolute sm:top-10 sm:left-auto sm:right-0 sm:translate-x-0 z-20 bg-yellowLight border-2 border-greenDark rounded-xl shadow-lg p-4 min-w-56"
+                            >
+                                <h2 id="horario-title" className="text-center font-bold text-greenDark text-lg mb-3 shantell-sans">Horario</h2>
                                 <ul className="space-y-1">
                                     {dias.map((dia) => (
                                         <li key={dia} className="flex justify-between gap-x-4 text-sm text-greenDark">
@@ -71,7 +87,8 @@ export default function Header () {
                 <a
                     href='https://wa.me/56956396452'
                     rel="noopener noreferrer"
-                    className="flex items-center text-3xl text-greenDark hover:opacity-75 hover:scale-105"
+                    aria-label="Contactar por WhatsApp"
+                    className="flex items-center text-3xl text-greenDark hover:opacity-75 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-greenDark rounded"
                 >
                     <MdWhatsapp />
                 </a>

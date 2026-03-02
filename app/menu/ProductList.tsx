@@ -10,44 +10,44 @@ export default function ProductsList({ products }: { products: Product[] }) {
   return (
     <div className="p-2 max-w-5xl mx-auto space-y-8 overflow-x-hidden">
       <h3 className='text-greenDark text-2xl shantell-sans font-bold mb-2 overflow-x-hidden'>A tu gusto</h3>
-      <div className='flex flex-col md:flex-row pb-4 md:pb-6 justify-around'>
+      <div className='flex flex-col md:flex-row pb-4 md:pb-6 justify-around gap-5'>
           {/* Jugos y cafe y frutas a eleccion*/}
           <div className="flex flex-col md:w-1/2 gap-y-2 md:gap-x-20">
             <h2 className='shantell-sans font-bold text-lg text-orangeDark text-shadow-md/10'>Jugos y café</h2>
-            <div className='flex flex-col lg:flex-row px-2 md:px-8 justify-between text-greenDark'>
+            <div className='flex flex-col lg:flex-row px-2 xl:px-8 justify-between text-greenDark'>
                 <h2 className='sm:pr-4 shantell-sans font-semibold'>Jugo simple</h2>
-                <div className='flex px-12 justify-between'>
-                  <p className='shantell-sans'>en agua: </p>
-                  <p className='inline shantell-sans font-medium'>$2300</p>
+                <div className='flex px-2 items-center justify-between'>
+                  <p className='shantell-sans pr-1'>en agua: </p>
+                  <p className='inline shantell-sans font-medium'> $2300</p>
                 </div>
-                <div className='flex px-12 justify-between'>  
-                  <p className='shantell-sans'>en leche: </p>
+                <div className='flex px-2 items-center justify-between'>  
+                  <p className='shantell-sans pr-1'>en leche: </p>
                   <p className='inline shantell-sans font-medium'>$2800</p>
                 </div>
             </div>
-            <div className='flex flex-col lg:flex-row px-2 md:px-8 justify-between text-greenDark'>
+            <div className='flex flex-col lg:flex-row px-2 xl:px-8 justify-between text-greenDark'>
                 <h2 className='sm:pr-4 shantell-sans font-semibold'>Jugo doble</h2>
-                <div className='flex px-12 justify-between'> 
-                  <p className='shantell-sans'>en agua: </p>
+                <div className='flex px-2 items-center justify-between'> 
+                  <p className='shantell-sans pr-1'>en agua: </p>
                   <p className='inline shantell-sans font-medium'>$2700</p>
                 </div>
-                <div className='flex px-12 justify-between'> 
-                  <p className='shantell-sans'>en leche: </p>
+                <div className='flex px-2 items-center justify-between'> 
+                  <p className='shantell-sans pr-1'>en leche: </p>
                   <p className='inline shantell-sans font-medium'>$3100</p>
                 </div>
             </div>
-            <div className='flex flex-col lg:flex-row px-2 md:px-8 justify-between text-greenDark'>
+            <div className='flex flex-col lg:flex-row px-2 xl:px-8 justify-between text-greenDark'>
                 <h2 className='sm:pr-4 shantell-sans font-semibold'>Jugo triple</h2>
-                <div className='flex px-12 justify-between'> 
-                  <p className='shantell-sans'>en agua: </p>
+                <div className='flex px-2 items-center justify-between'> 
+                  <p className='shantell-sans pr-1'>en agua: </p>
                   <p className='inline shantell-sans font-medium'>$3200</p>
                 </div>
-                <div className='flex px-12 justify-between'>  
-                  <p className='shantell-sans'>en leche: </p>
+                <div className='flex px-2 items-center justify-between'>  
+                  <p className='shantell-sans pr-1'>en leche: </p>
                   <p className='inline shantell-sans font-medium'>$3600</p>
                 </div>
             </div>
-            <div className='flex px-2 md:px-8 justify-between text-greenDark flex-wrap min-w-0'>
+            <div className='flex px-2 xl:px-8 justify-between text-greenDark flex-wrap min-w-0'>
                 <h2 className='sm:pr-4 shantell-sans font-semibold'>Café helado</h2>
                 <p className='inline px-12 justify-between shantell-sans font-medium'>$2300</p>
             </div>
@@ -112,7 +112,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
               </div>      
             </div>
             {/* Extractos */}
-            <div className="mt-4 gap-y-3 gap-x-20">
+            <div className="mt-4 flex flex-col gap-y-3">
               <h2 className='shantell-sans font-bold text-lg text-orangeDark text-shadow-md/10'>Extractos (sin agua)</h2>
               <div className='flex justify-between text-greenDark px-8'>
                   <h2 className='pr-6 shantell-sans font-semibold'>1 fruta u hortaliza</h2>
@@ -132,7 +132,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
               </div>
             </div>
             {/* Sanguches */}
-            <div className="mt-6 gap-y-3 gap-x-20">
+            <div className="mt-6 flex flex-col gap-y-3">
                 <h2 className='shantell-sans font-bold text-lg text-orangeDark text-shadow-md/10'>Sándwiches</h2>
                 <p className='shantell-sans text-sm font-semibold text-center'>(Consulta disponibilidad)</p>
             </div>
@@ -148,7 +148,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
               <div>
                 <div className='flex justify-between text-greenDark'>
                   <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
-                  <h3 className='text-base shantell-sans font-medium'>${product.price}</h3>
+                  <span className='text-base shantell-sans font-medium'>${product.price}</span>
                 </div>
                 <p className='shantell-sans'>{product.description}</p>
               </div>
@@ -166,7 +166,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
               <div>
                 <div className='flex justify-between text-greenDark'>
                   <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
-                  <h3 className='text-base shantell-sans font-medium'>${product.price}</h3>
+                  <span className='text-base shantell-sans font-medium'>${product.price}</span>
                 </div>
                 <p className='shantell-sans'>{product.description}</p>
               </div>
@@ -184,7 +184,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
               <div>
                 <div className='flex justify-between text-greenDark'>
                   <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
-                  <h3 className='text-base shantell-sans font-medium'>${product.price}</h3>
+                  <span className='text-base shantell-sans font-medium'>${product.price}</span>
                 </div>
                 <p className='shantell-sans'>{product.description}</p>
               </div>
@@ -202,7 +202,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
               <div>
                 <div className='flex justify-between text-greenDark'>
                   <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
-                  <h3 className='text-base shantell-sans font-medium'>${product.price}</h3>
+                  <span className='text-base shantell-sans font-medium'>${product.price}</span>
                 </div>
                 <p className='shantell-sans'>{product.description}</p>
               </div>
