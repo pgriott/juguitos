@@ -1,11 +1,16 @@
 import Link from 'next/link';
 import { Product } from "./product-data";
+import { SanityCategory, SanityMenuItem } from "@/sanity/queries/menu";
 
-export default function ProductsList({ products }: { products: Product[] }) {
-  const jugoProducts = products.filter((product) => product.categoria === "jugo");
-  const batidoProducts = products.filter((product) => product.categoria === "batido");
-  const deportistasProducts = products.filter((product) => product.categoria === "deportistas");
-  const extractosProducts = products.filter((product) => product.categoria === "extractos");
+type Props = {
+  categories: SanityCategory[];
+  menuItems: SanityMenuItem[];
+  staticProducts: Product[];
+};
+
+export default function ProductsList({ categories, menuItems, staticProducts }: Props) {
+  // If Sanity returned data, use it; otherwise fall back to static product-data.ts
+  const useCmsData = categories.length > 0 && menuItems.length > 0;
 
   return (
     <div className="p-2 max-w-5xl mx-auto space-y-8 overflow-x-hidden">
@@ -20,29 +25,29 @@ export default function ProductsList({ products }: { products: Product[] }) {
                   <p className='shantell-sans pr-1'>en agua: </p>
                   <p className='inline shantell-sans font-medium'> $2300</p>
                 </div>
-                <div className='flex px-2 items-center justify-between'>  
+                <div className='flex px-2 items-center justify-between'>
                   <p className='shantell-sans pr-1'>en leche: </p>
                   <p className='inline shantell-sans font-medium'>$2800</p>
                 </div>
             </div>
             <div className='flex flex-col lg:flex-row px-2 xl:px-8 justify-between text-greenDark'>
                 <h2 className='sm:pr-4 shantell-sans font-semibold'>Jugo doble</h2>
-                <div className='flex px-2 items-center justify-between'> 
+                <div className='flex px-2 items-center justify-between'>
                   <p className='shantell-sans pr-1'>en agua: </p>
                   <p className='inline shantell-sans font-medium'>$2700</p>
                 </div>
-                <div className='flex px-2 items-center justify-between'> 
+                <div className='flex px-2 items-center justify-between'>
                   <p className='shantell-sans pr-1'>en leche: </p>
                   <p className='inline shantell-sans font-medium'>$3100</p>
                 </div>
             </div>
             <div className='flex flex-col lg:flex-row px-2 xl:px-8 justify-between text-greenDark'>
                 <h2 className='sm:pr-4 shantell-sans font-semibold'>Jugo triple</h2>
-                <div className='flex px-2 items-center justify-between'> 
+                <div className='flex px-2 items-center justify-between'>
                   <p className='shantell-sans pr-1'>en agua: </p>
                   <p className='inline shantell-sans font-medium'>$3200</p>
                 </div>
-                <div className='flex px-2 items-center justify-between'>  
+                <div className='flex px-2 items-center justify-between'>
                   <p className='shantell-sans pr-1'>en leche: </p>
                   <p className='inline shantell-sans font-medium'>$3600</p>
                 </div>
@@ -57,7 +62,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
                 <p>Frutilla</p>
                 <p>Mora</p>
                 <p>Arándano</p>
-                <p>Mango</p>                    
+                <p>Mango</p>
                 <p>Piña</p>
                 <p>Plátano</p>
                 <p>Guayaba</p>
@@ -70,7 +75,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
                 <p>Chirimoya</p>
                 <p>Frambuesa</p>
                 <p>Naranja</p>
-                <p>Melón</p>                    
+                <p>Melón</p>
                 <p>Papaya</p>
                 <p>Cereza</p>
                 <p>Durazno</p>
@@ -95,21 +100,21 @@ export default function ProductsList({ products }: { products: Product[] }) {
                 <p>$400</p>
               </div>
               <div className='flex justify-between'>
-                <p>Algarrobina</p> 
+                <p>Algarrobina</p>
                 <p>$400</p>
               </div>
-              <div className='flex justify-between'>          
+              <div className='flex justify-between'>
                 <p>Canela</p>
                 <p>$200</p>
               </div>
               <div className='flex justify-between'>
                 <p>Proteína</p>
                 <p>$1200</p>
-              </div>       
+              </div>
               <div className='flex justify-between'>
                 <p>Leche vegana</p>
                 <p>$600</p>
-              </div>      
+              </div>
             </div>
             {/* Extractos */}
             <div className="mt-4 flex flex-col gap-y-3">
@@ -126,7 +131,7 @@ export default function ProductsList({ products }: { products: Product[] }) {
                   <p>Zanahoria</p>
                   <p>Betarraga</p>
                   <p>Piña</p>
-                  <p>Apio</p>                    
+                  <p>Apio</p>
                   <p>Manzana</p>
                   <p>Jengibre</p>
               </div>
@@ -139,100 +144,98 @@ export default function ProductsList({ products }: { products: Product[] }) {
           </div>
       </div>
 
-      {/* JUGOS */}
-      <div>
-        <h3 className='text-orangeDark text-2xl shantell-sans font-bold mb-2'>Jugos</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-20">
-          {jugoProducts.map(product => (
-            <Link key={product.id} href={"/menu/" + product.id}>
-              <div>
-                <div className='flex justify-between text-greenDark'>
-                  <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
-                  <span className='text-base shantell-sans font-medium'>${product.price}</span>
-                </div>
-                <p className='shantell-sans'>{product.description}</p>
+      {useCmsData ? (
+        // Render dynamically from Sanity CMS
+        categories.map((cat) => {
+          const items = menuItems.filter((item) => item.category === cat.slug);
+          return (
+            <div key={cat._id}>
+              <h3 className='text-orangeDark text-2xl shantell-sans font-bold mb-2'>{cat.title}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-20">
+                {items.map((item) => (
+                  <Link key={item._id} href={"/menu/" + item.slug}>
+                    <div>
+                      <div className='flex justify-between text-greenDark'>
+                        <h2 className='text-base shantell-sans font-medium'>{item.name}</h2>
+                        <span className='text-base shantell-sans font-medium'>${item.price}</span>
+                      </div>
+                      <p className='shantell-sans'>{item.description}</p>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* BATIDOS */}
-      <div>
-        <h3 className='text-orangeDark text-2xl shantell-sans font-bold mb-2'>Batidos</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-20">
-          {batidoProducts.map(product => (
-            <Link key={product.id} href={"/menu/" + product.id}>
-              <div>
-                <div className='flex justify-between text-greenDark'>
-                  <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
-                  <span className='text-base shantell-sans font-medium'>${product.price}</span>
-                </div>
-                <p className='shantell-sans'>{product.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* DEPORTISTAS */}
-      <div>
-        <h3 className='text-orangeDark text-2xl shantell-sans font-bold mb-2'>Batidos para deportistas</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-20">
-          {deportistasProducts.map(product => (
-            <Link key={product.id} href={"/menu/" + product.id}>
-              <div>
-                <div className='flex justify-between text-greenDark'>
-                  <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
-                  <span className='text-base shantell-sans font-medium'>${product.price}</span>
-                </div>
-                <p className='shantell-sans'>{product.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* EXTRACTOS */}
-      <div>
-        <h3 className='text-orangeDark text-2xl shantell-sans font-bold mb-2'>Extractos</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-20">
-          {extractosProducts.map(product => (
-            <Link key={product.id} href={"/menu/" + product.id}>
-              <div>
-                <div className='flex justify-between text-greenDark'>
-                  <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
-                  <span className='text-base shantell-sans font-medium'>${product.price}</span>
-                </div>
-                <p className='shantell-sans'>{product.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+            </div>
+          );
+        })
+      ) : (
+        // Static fallback from product-data.ts
+        <>
+          <div>
+            <h3 className='text-orangeDark text-2xl shantell-sans font-bold mb-2'>Jugos</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-20">
+              {staticProducts.filter(p => p.categoria === 'jugo').map(product => (
+                <Link key={product.id} href={"/menu/" + product.id}>
+                  <div>
+                    <div className='flex justify-between text-greenDark'>
+                      <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
+                      <span className='text-base shantell-sans font-medium'>${product.price}</span>
+                    </div>
+                    <p className='shantell-sans'>{product.description}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className='text-orangeDark text-2xl shantell-sans font-bold mb-2'>Batidos</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-20">
+              {staticProducts.filter(p => p.categoria === 'batido').map(product => (
+                <Link key={product.id} href={"/menu/" + product.id}>
+                  <div>
+                    <div className='flex justify-between text-greenDark'>
+                      <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
+                      <span className='text-base shantell-sans font-medium'>${product.price}</span>
+                    </div>
+                    <p className='shantell-sans'>{product.description}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className='text-orangeDark text-2xl shantell-sans font-bold mb-2'>Batidos para deportistas</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-20">
+              {staticProducts.filter(p => p.categoria === 'deportistas').map(product => (
+                <Link key={product.id} href={"/menu/" + product.id}>
+                  <div>
+                    <div className='flex justify-between text-greenDark'>
+                      <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
+                      <span className='text-base shantell-sans font-medium'>${product.price}</span>
+                    </div>
+                    <p className='shantell-sans'>{product.description}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className='text-orangeDark text-2xl shantell-sans font-bold mb-2'>Extractos</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-20">
+              {staticProducts.filter(p => p.categoria === 'extractos').map(product => (
+                <Link key={product.id} href={"/menu/" + product.id}>
+                  <div>
+                    <div className='flex justify-between text-greenDark'>
+                      <h2 className='text-base shantell-sans font-medium'>{product.name}</h2>
+                      <span className='text-base shantell-sans font-medium'>${product.price}</span>
+                    </div>
+                    <p className='shantell-sans'>{product.description}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
-
-
-/*
-
-
-JUEGOS, BATIDOS, ETC
-
-
-
-
-
-
-
- <div className="md:w-1/2 mb-5 md:mr-8">
-    <Image 
-            src={'/' + product.imageUrl} 
-            alt="Project Image"
-            className='w-full h-auto rounded-lg shadow-md' 
-            width={150} 
-            height={150} 
-    />
-</div>
- */
