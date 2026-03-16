@@ -2,7 +2,7 @@ import Header from "../componentes/Header";
 import ScrollToTopButton from "../componentes/ScrollToTop";
 import ProductsList from "./ProductList";
 import { client } from "@/sanity/client";
-import { categoriesQuery, menuItemsQuery, SanityCategory, SanityMenuItem } from "@/sanity/queries/menu";
+import { categoriesQuery, menuItemsQuery, flexibleItemsQuery, frutasQuery, extractosIngredientesQuery, SanityCategory, SanityMenuItem, SanityFlexibleItem, SanityIngredient } from "@/sanity/queries/menu";
 import { products } from "./product-data";
 
 export const revalidate = 30;
@@ -12,11 +12,17 @@ export type { SanityCategory, SanityMenuItem };
 export default async function MenuPage() {
   let categories: SanityCategory[] = [];
   let menuItems: SanityMenuItem[] = [];
+  let flexibleItems: SanityFlexibleItem[] = [];
+  let frutas: SanityIngredient[] = [];
+  let extractosIngredientes: SanityIngredient[] = [];
 
   try {
-    [categories, menuItems] = await Promise.all([
+    [categories, menuItems, flexibleItems, frutas, extractosIngredientes] = await Promise.all([
       client.fetch<SanityCategory[]>(categoriesQuery),
       client.fetch<SanityMenuItem[]>(menuItemsQuery),
+      client.fetch<SanityFlexibleItem[]>(flexibleItemsQuery),
+      client.fetch<SanityIngredient[]>(frutasQuery),
+      client.fetch<SanityIngredient[]>(extractosIngredientesQuery),
     ]);
   } catch {
     // Sanity unavailable — fall through to static fallback below
@@ -30,6 +36,9 @@ export default async function MenuPage() {
           categories={categories}
           menuItems={menuItems}
           staticProducts={products}
+          flexibleItems={flexibleItems}
+          frutas={frutas}
+          extractosIngredientes={extractosIngredientes}
         />
         <ScrollToTopButton />
       </div>
