@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { MdLocationOn } from 'react-icons/md';
 import { MdCalendarMonth } from 'react-icons/md';
 import { MdWhatsapp } from 'react-icons/md';
+import { WHATSAPP_URL, GOOGLE_MAPS_URL, BUSINESS_HOURS } from '@/lib/constants'
 
 const dias = [
     "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"
@@ -42,7 +43,7 @@ export default function Header () {
             </div>
             <div className="flex gap-x-8 justify-center sm:justify-end">
                 <a
-                    href='https://maps.app.goo.gl/WwZnZdwvgnq39QQc9'
+                    href={GOOGLE_MAPS_URL}
                     rel="noopener noreferrer"
                     target="_blank"
                     aria-label="Ver ubicación en el mapa"
@@ -76,7 +77,7 @@ export default function Header () {
                                     {dias.map((dia) => (
                                         <li key={dia} className="flex justify-between gap-x-4 text-sm text-greenDark">
                                             <span className="font-medium">{dia}</span>
-                                            <span>10:00 – 19:00</span>
+                                            <span>{BUSINESS_HOURS}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -85,7 +86,7 @@ export default function Header () {
                     )}
                 </div>
                 <a
-                    href='https://wa.me/56956396452'
+                    href={WHATSAPP_URL}
                     rel="noopener noreferrer"
                     aria-label="Contactar por WhatsApp"
                     className="flex items-center text-3xl text-greenDark hover:opacity-75 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-greenDark rounded"

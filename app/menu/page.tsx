@@ -9,23 +9,13 @@ export const revalidate = 30;
 export type { SanityCategory, SanityMenuItem };
 
 export default async function MenuPage() {
-  let categories: SanityCategory[] = [];
-  let menuItems: SanityMenuItem[] = [];
-  let flexibleItems: SanityFlexibleItem[] = [];
-  let frutas: SanityIngredient[] = [];
-  let extractosIngredientes: SanityIngredient[] = [];
-
-  try {
-    [categories, menuItems, flexibleItems, frutas, extractosIngredientes] = await Promise.all([
-      client.fetch<SanityCategory[]>(categoriesQuery),
-      client.fetch<SanityMenuItem[]>(menuItemsQuery),
-      client.fetch<SanityFlexibleItem[]>(flexibleItemsQuery),
-      client.fetch<SanityIngredient[]>(frutasQuery),
-      client.fetch<SanityIngredient[]>(extractosIngredientesQuery),
-    ]);
-  } catch {
-    // Sanity unavailable — fall through to static fallback below
-  }
+  const [categories, menuItems, flexibleItems, frutas, extractosIngredientes] = await Promise.all([
+    client.fetch<SanityCategory[]>(categoriesQuery),
+    client.fetch<SanityMenuItem[]>(menuItemsQuery),
+    client.fetch<SanityFlexibleItem[]>(flexibleItemsQuery),
+    client.fetch<SanityIngredient[]>(frutasQuery),
+    client.fetch<SanityIngredient[]>(extractosIngredientesQuery),
+  ]);
 
   return (
     <>
@@ -42,8 +32,4 @@ export default async function MenuPage() {
       </div>
     </>
   );
-}
-
-/**
-                 <h1 className="text-3xl mb-4 text-greenDark">Menú</h1>
- */
+};
